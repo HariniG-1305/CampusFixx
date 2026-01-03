@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | CampusFixx</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container {
+            max-width: 1000px;
+            /* Wider for dashboard */
+        }
+
+        .complaint-card {
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .complaint-card.priority-high {
+            border-left-color: #e74c3c;
+        }
+
+        .complaint-card.priority-medium {
+            border-left-color: #f1c40f;
+        }
+
+        .complaint-card.priority-low {
+            border-left-color: #2ecc71;
+        }
+
+        .complaint-info h4 {
+            margin-bottom: 5px;
+            color: #2d3436;
+        }
+
+        .complaint-info small {
+            color: #636e72;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .complaint-info p {
+            font-size: 0.9rem;
+            color: #2d3436;
+        }
+
+        .actions button {
+            width: auto;
+            margin-top: 0;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+
+        .btn-resolve {
+            background: #2ecc71;
+        }
+
+        .btn-reject {
+            background: #e74c3c;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <p class="subtitle">Manage and update campus issues</p>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card total">
+                <div class="stat-icon">📊</div>
+                <div class="stat-info">
+                    <h3>Total</h3>
+                    <span id="statTotal">0</span>
+                </div>
+            </div>
+            <div class="stat-card pending">
+                <div class="stat-icon">⏳</div>
+                <div class="stat-info">
+                    <h3>Pending</h3>
+                    <span id="statPending">0</span>
+                </div>
+            </div>
+            <div class="stat-card resolved">
+                <div class="stat-icon">✅</div>
+                <div class="stat-info">
+                    <h3>Resolved</h3>
+                    <span id="statResolved">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <select id="filterStatus" style="flex: 1;">
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="resolved">Resolved</option>
+            </select>
+            <select id="filterPriority" style="flex: 1;">
+                <option value="all">All Priorities</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+            <button id="refreshBtn" style="width: auto; margin-top: 0;">Refresh</button>
+            <button id="logoutBtn" style="width: auto; margin-top: 0; background: #e74c3c;">Logout</button>
+        </div>
+
+        <script>
+            // Auth Guard
+            if (!localStorage.getItem("campusFixx_admin_auth")) {
+                window.location.href = "login.html";
+            }
+
+            document.getElementById("logoutBtn").addEventListener("click", () => {
+                localStorage.removeItem("campusFixx_admin_auth");
+                window.location.href = "login.html";
+            });
+        </script>
+
+        <div id="complaintsList">
+            <p style="text-align: center;">Loading complaints...</p>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html">Back to Home</a>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>
