@@ -24,7 +24,18 @@ Traditional manual complaint systems are often slow, opaque, and difficult to tr
 - **Frontend:** Vanilla HTML5, CSS3 (Custom Glassmorphism Design), JavaScript (ES6+)
 - **Backend/Database:** Firebase Firestore (Real-time Database)
 - **Icons & Fonts:** Google Fonts (Plus Jakarta Sans), Lucide-inspired SVG icons.
-- **Deployment:** [Link to follow]
+
+##  Testing Credentials
+To explore the platform, use the following credentials:
+
+### Student Login
+- **Name:** Dharshini
+- **Register No:** 622123202002
+- **Department:** IT
+
+### Admin Login
+- **Username:** admin
+- **Password:** admin123
 
 ## Getting Started
 1. Clone the repository.
