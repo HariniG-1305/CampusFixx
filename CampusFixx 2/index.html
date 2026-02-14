@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Login | CampusFixx</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="centered-layout">
+
+  <div class="container" style="max-width: 400px; text-align: center;">
+    <div style="margin-bottom: 20px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#667eea"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+      </svg>
+    </div>
+    <h1>Student Login</h1>
+    <p class="subtitle">Enter your details to continue</p>
+
+    <form id="studentLoginForm">
+      <div style="text-align: left;">
+        <label for="sName">Full Name</label>
+        <input type="text" id="sName" placeholder="Enter your name" required>
+      </div>
+
+      <div style="text-align: left;">
+        <label for="sReg">Register Number</label>
+        <input type="text" id="sReg" placeholder="Enter registration number" required>
+      </div>
+
+      <div style="text-align: left;">
+        <label for="sDept">Department</label>
+        <select id="sDept" required>
+          <option value="" disabled selected>Select Department</option>
+          <option>CSE</option>
+          <option>IT</option>
+          <option>ECE</option>
+          <option>EEE</option>
+          <option>MECH</option>
+          <option>CIVIL</option>
+          <option>AGRI</option>
+          <option>FT</option>
+          <option>CHEM</option>
+          <option>PHARMA</option>
+          <option>AIML</option>
+          <option>AERO</option>
+          <option>BIOTECH</option>
+          <option>CYBER</option>
+          <option>BME</option>
+          <option>IOT</option>
+          <option>MECHATRONICS</option>
+          <option>ROBOTICS</option>
+          <option>AIDS</option>
+          <option>S&F</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <button type="submit">Login</button>
+      <p id="loginError" style="color: #ef4444; margin-top: 10px; display: none; font-size: 0.9rem;">Invalid Details!
+        Please check Name, Reg No & Dept.</p>
+    </form>
+
+    <div class="nav-links" style="margin-top: 30px;">
+      <a href="staff_login.html">Staff Login</a> |
+      <a href="login.html">Admin Login</a> |
+      <a href="dept_login.html">In-charge Login</a>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDKSTsCsCnbUZUzq6T18RJ1j0K63jwFRkU",
+      authDomain: "campus-fix-425f7.firebaseapp.com",
+      projectId: "campus-fix-425f7",
+      storageBucket: "campus-fix-425f7.firebasestorage.app",
+      messagingSenderId: "136230732752",
+      appId: "1:136230732752:web:9644f9b7a8df3980f46fd5",
+      measurementId: "G-ZD50M396Y6"
+    };
+    // Connection Check
+    if (typeof firebase === 'undefined') {
+      const errorDiv = document.getElementById("loginError");
+      errorDiv.innerText = "CRITICAL ERROR: Firebase connection blocked! Please check your internet or disable ad-blockers.";
+      errorDiv.style.display = "block";
+      console.error("Firebase SDK not loaded.");
+    } else {
+      try {
+        firebase.initializeApp(firebaseConfig);
+        console.log("Firebase initialized successfully");
+      } catch (e) {
+        console.error("Firebase Initialization Error:", e);
+        const errorDiv = document.getElementById("loginError");
+        errorDiv.innerText = "ERROR: Failed to initialize database. Please check your config.";
+        errorDiv.style.display = "block";
+      }
+    }
+
+    // Diagnostic: Check LocalStorage (Required for session)
+    try {
+      localStorage.setItem("test", "test");
+      localStorage.removeItem("test");
+    } catch (e) {
+      console.error("LocalStorage Blocked:", e);
+      const errorDiv = document.getElementById("loginError");
+      errorDiv.innerText = "CRITICAL ERROR: Storage is blocked by your browser! Please disable 'Block all cookies' or 'Private Mode'.";
+      errorDiv.style.display = "block";
+    }
+
+    const db = typeof firebase !== 'undefined' ? firebase.firestore() : { collection: () => ({ where: () => ({ get: () => Promise.resolve({ empty: true }) }) }) };
+
+    // Check if already logged in
+    if (localStorage.getItem("campusFixx_studentName")) {
+      window.location.href = "student_dashboard.html";
+    }
+
+    document.getElementById("studentLoginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const nameIn = document.getElementById("sName").value.trim();
+      const regIn = document.getElementById("sReg").value.trim();
+      const deptIn = document.getElementById("sDept").value;
+
+      try {
+        // Query Firestore for the student
+        // Note: Field names must match what we upload (name, regNo, dept)
+        const snapshot = await db.collection("students")
+          .where("regNo", "==", regIn)
+          .where("dept", "==", deptIn)
+          .get();
+
+        if (snapshot.empty) {
+          document.getElementById("loginError").style.display = "block";
+          return;
+        }
+
+        // Check name (usually name matches case, but let's be flexible)
+        let found = null;
+        snapshot.forEach(doc => {
+          const s = doc.data();
+          if (s.name.toLowerCase() === nameIn.toLowerCase()) {
+            found = s;
+          }
+        });
+
+        if (found) {
+          localStorage.setItem("campusFixx_studentName", found.name);
+          localStorage.setItem("campusFixx_studentReg", found.regNo);
+          localStorage.setItem("campusFixx_studentDept", found.dept);
+          window.location.href = "student_dashboard.html";
+        } else {
+          document.getElementById("loginError").style.display = "block";
+        }
+      } catch (err) {
+        console.error("Login Error:", err);
+        alert("Verification failed. Please try again.");
+      }
+    });
+  </script>
+
+</body>
+
+</html>
