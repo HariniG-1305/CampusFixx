@@ -1,46 +1,53 @@
-# CampusFixx 
+# CampusFixx 🚀
 
-**CampusFixx** is a modern, digitalized campus complaint management system designed to bridge the communication gap between students and administration. Built for speed, transparency, and accountability, it ensures that every campus issue—from maintenance to infrastructure—is heard and resolved efficiently.
-
-##  Vision
-Traditional manual complaint systems are often slow, opaque, and difficult to track. **CampusFixx** digitizes this entire workflow, providing students with real-time tracking and administrators with a powerful dashboard to manage and resolve issues proactively.
-
-##  Key Features
-
-### For Students
-- **Verified Login:** Secure login using Name, Registration Number, and Department.
-- **Instant Reporting:** Submit complaints with detailed descriptions and categories.
-- **Real-time Tracking:** Track the status of your complaints (Pending, In Progress, Resolved) using a unique Complaint ID.
-- **Submission Limit:** Fair usage policy with a limit of 5 complaints per day per student.
-- **My Complaints:** A personal dashboard to view history and status of all your reports.
-
-###  For Administrators
-- **Comprehensive Dashboard:** A high-level overview of total, pending, and resolved complaints.
-- **Status Management:** Update complaint status with a single click to keep students informed.
-- **Advanced Filtering:** Sort through complaints by department or status to prioritize urgent tasks.
-- **Secure Access:** Dedicated admin authentication layer.
-
-## Tech Stack
-- **Frontend:** Vanilla HTML5, CSS3 (Custom Glassmorphism Design), JavaScript (ES6+)
-- **Backend/Database:** Firebase Firestore (Real-time Database)
-- **Icons & Fonts:** Google Fonts (Plus Jakarta Sans), Lucide-inspired SVG icons.
-
-##  Testing Credentials
-To explore the platform, use the following credentials:
-
-### Student Login
-- **Name:** Dharshini
-- **Register No:** 622123202002
-- **Department:** IT
-
-### Admin Login
-- **Username:** admin
-- **Password:** admin123
-
-## Getting Started
-1. Clone the repository.
-2. Open `index.html` in your browser.
-3. No build step required—it's pure web magic!
+**CampusFixx** is a high-performance, digitized campus complaint management system designed to bridge the gap between students, staff, and administration. Developed for the **Vibex1.0 Hackathon**, it transforms manual reporting into an automated, transparent, and accountable workflow.
 
 ---
-*Developed for Vibex1.0 Hackathon by Harini.G & Hari Saran.M/HackNova.*
+
+## 🏗️ Project Vision
+Traditional campus complaint systems are slow, opaque, and difficult to manage. **CampusFixx** digitizes this experience with real-time tracking, AI-powered categorization, and automated email routing, ensuring that every issue—from electrical faults to infrastructure needs—is handled with precision.
+
+## ✨ Key Features
+
+### 👨‍🎓 For Students
+- **Smart Reporting:** Verification-based login and streamlined complaint submission.
+- **Real-time Tracking:** Monitor complaint lifecycle (Pending → In Progress → Resolved) via a unique ID.
+- **Fair Usage Policy:** Integrated logic to limit submissions to 5 per day per student.
+- **Personal Dashboard:** A unified view of all submitted reports and their history.
+
+### 👨‍🏫 For Staff & Teachers
+- **Dedicated Staff Portal:** Simplified reporting interface specifically for faculty members.
+- **Dashboard Access:** View and track school-level issues reported by the teaching community.
+
+### 🛠️ For Administrators & In-charges
+- **AI-Powered Categorization:** Automatically detects and tags complaints into categories (Electrical, Plumbing, etc.) based on keywords.
+- **SLA Management:** Integrated Service Level Agreement tracking with automatic escalation for delayed high-priority tasks.
+- **Role-Based Portals:** Specialized views for Department In-charges (e.g., Plumbing In-charge only sees plumbing issues).
+- **Data Analytics:** Real-time stats showing Total, Pending, Resolved, and Denied complaints at a glance.
+- **One-Click Export:** Generate professional CSV reports for administrative reviews.
+
+## 🛠️ Tech Stack
+- **Frontend:** Vanilla HTML5, Modern CSS3 (Glassmorphism), JavaScript (ES6+).
+- **Backend:** Firebase Firestore (Real-time NoSQL Database).
+- **Notifications:** EmailJS for automated routing to department heads.
+- **Animations:** AOS (Animate On Scroll) & Custom Keyframes for a premium feel.
+- **Icons:** SVG-based Lucide style iconography.
+
+## 🔑 Access Credentials
+
+### 👋 Student Access
+- **Reg No:** `622123202002` (Example: Dharshini, IT)
+- Use any valid student data uploaded via the Importer.
+
+### 🕴️ Admin Access
+- **User:** `admin` | **Pass:** `admin123`
+
+### 🏢 Department In-charge (Example)
+- **User:** `electrical` | **Pass:** `admin123`
+- *Available for: Plumbing, Cleanliness, Internet, Furniture.*
+
+
+
+### 🏆 Hackathon Credits
+Developed  by **Harini.G** & **Hari Saran.M** (Team **HackNova**) for **Vibex1.0**.
+
