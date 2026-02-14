@@ -36,14 +36,14 @@ Traditional campus complaint systems are slow, opaque, and difficult to manage. 
 ## 🔑 Access Credentials
 
 ### 👋 Student Access
-- **Reg No:** `622123202002` (Example: Dharshini, IT)
+- **Reg No:** `622123201246` (Example: Fahad K,Civil)
 - Use any valid student data uploaded via the Importer.
 
 ### 🕴️ Admin Access
 - **User:** `admin` | **Pass:** `admin123`
 
 ### 🏢 Department In-charge (Example)
-- **User:** `electrical` | **Pass:** `admin123`
+- **User:** `Electrical123@gmail.com` | **Pass:** `electrical123`
 - *Available for: Plumbing, Cleanliness, Internet, Furniture.*
 
 
